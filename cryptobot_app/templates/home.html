@@ -1,0 +1,71 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block pages_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="home-page">
+  <div class="section analize">
+    <div class="sub-section">
+      <div class="title">Trending</div>
+      <table class="trending-table">
+        <tr>
+          <th class="col-symbol">Coin</th>
+          <th class="col-price">Price</th>
+          <th class="col-volume">Volume</th>
+          <th class="col-1h">1h%</th>
+          <th class="col-1d">1d%</th>
+        </tr>
+        {% for coin in trending_crypto %}
+          <tr>
+            <td class="col-symbol">{{ coin.symbol }}</td>
+            <td class="col-price">{{ coin.price|floatformat:8 }}</td>
+            <td class="col-volume">{{ coin.volume_24h|floatformat:4 }}</td>
+            <td class="col-1h">{{ coin.percent_change_1h|floatformat:2 }}</td>
+            <td class="col-1d">{{ coin.percent_change_24h|floatformat:2 }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="sub-section">
+      <div class="button">
+        <button type="button" class="btn btn-dark btn-lg">Analize</button>
+      </div>
+      <!-- <div class="result">result</div> -->
+      {{ trending_crypto|json_script:'data' }}
+      {{ history_price|json_script:'data' }}
+    </div>
+  </div>
+  <div class="section execute">
+    <div class="sub-section">
+      <div class="result">Choose Result</div>
+      <div class="list">
+        <table>
+          {% for key, coin in history_price.items %}
+            <tr>
+              <td class="col-symbol">{{ key }}</td>      
+              <!-- <td class="col-symbol">{{ coin }}</td>       -->
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="sub-section">
+      <div class="button">
+        <button type="button" class="btn btn-dark btn-lg">Execute</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const crypto_list = JSON.parse(document.getElementById('data').textContent)
+  console.log((crypto_list))
+</script>
+{% endblock %}

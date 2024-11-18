@@ -1,0 +1,23 @@
+.command-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding-left: 10%;
+}
+
+.command-page .title {
+  font-size: 40px;
+}
+
+.command-page .form {
+  margin-top: 3%;
+}
+
+.form textarea{
+  border-radius: 20px;  
+}
+
+.command-page .button {
+  margin-top: 5%;
+}

@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}Command{% endblock %}
+
+{% block pages_css %}
+<link rel="stylesheet" href="{% static 'css/command.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="command-page">
+  <div class="title">
+    ChatGpt Command
+  </div>
+  <div class="form">
+    <form action="" method="POST">
+      {% csrf_token %} 
+      <textarea name="command" id="" style="width: 80%; height: 60vh" name="command">{{ command }}</textarea>
+      <div class="button">
+        <button type="submit" class="btn btn-dark btn-lg">Update</button>
+      </div>
+    </form>
+    {% if command %}
+        <p>Submitted Text: {{ command }}</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

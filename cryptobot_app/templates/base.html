@@ -1,0 +1,36 @@
+{% load static %}
+
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block pages_css %}{% endblock %}
+</head>
+<body>
+  <div class="container-fluid px-0">
+    <div class="left">
+      <div class="title"> Crypto Bot</div>
+      <div class="navbar">
+        <div class="nav home">
+          <a href="{% url 'home' %}">Home</a>
+        </div>
+        <div class="nav command">
+          <a href="{% url 'command' %}">Commands</a>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="content">
+          {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
